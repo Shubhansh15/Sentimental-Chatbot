@@ -1,0 +1,49 @@
+# Define sentiment lexicon (modify and expand as needed)
+sentiment_lexicon = {
+    'positive': ['great', 'happy', 'love', 'like', 'excited', 'super', 'good'],
+    'negative': ['bad', 'sad', 'hate', 'angry', 'terrible', 'unhappy', 'not good'],
+}
+
+def analyze_sentiment(text):
+  """
+  Analyzes the sentiment of a given text using a sentiment lexicon.
+
+  Args:
+    text: The text to analyze.
+
+  Returns:
+    A string representing the sentiment (positive, negative, or neutral).
+  """
+  text = text.lower().split()  # Lowercase and split into words
+  positive_count = 0
+  negative_count = 0
+
+  for word in text:
+    if word in sentiment_lexicon['positive']:
+      positive_count += 1
+    elif word in sentiment_lexicon['negative']:
+      negative_count += 1
+
+  if positive_count > negative_count:
+    return "positive"
+  elif negative_count > positive_count:
+    return "negative"
+  else:
+    return "neutral"
+
+def main():
+  while True:
+    user_input = input("You: ")
+    sentiment = analyze_sentiment(user_input)
+    
+    if sentiment == "positive":
+      print("Chatbot: That sounds great!")
+    elif sentiment == "negative":
+      print("Chatbot: I'm sorry to hear that. Is there anything I can help you with?")
+    else:
+      print("Chatbot: Interesting. Can you tell me more?")
+
+    print(f"Sentiment: {sentiment}")
+
+if __name__ == "__main__":
+  main()
